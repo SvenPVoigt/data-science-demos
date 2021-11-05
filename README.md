@@ -1,4 +1,8 @@
 # data-science-demos
+
+![Visualization of the full CO2 dataset](./climate_plot.png)
+
+
 Set of demos for datascience tools applied to a the Mauna Loa CO2 dataset from [here](https://gml.noaa.gov/ccgg/trends/). The `interp` folder uses a random train-test split and tests different regression models for interpolation. The `extrap` folder uses a continuous subset of data points (those between 1970 and 2000) and tests different regression models for extrapolation.
 
 ## Talking points
