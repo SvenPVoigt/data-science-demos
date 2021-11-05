@@ -7,12 +7,12 @@ from scipy.optimize import curve_fit
 # load in data per usual
 X_train, y_train = load_data('extrap_train.hdf5')
 
-def func(x, A, B, C, D, E, alpha, phi):
-    x = x - 2000
+def func(x, A, B, C, D, E, alpha, phi, x0):
+    x = x - x0
     y = A + B * x + C*x**2 + D * np.cos(2 * np.pi * x + phi) #+ E * np.exp(x / alpha)
     return y.squeeze()
 
-p0 = [10, 10, 10, 10, 10, 2000, 0]
+p0 = [10, 10, 10, 10, 10, 50, 0, 2000]
 popt, pcov = curve_fit(func, X_train, y_train.squeeze(), p0 = p0)
 
 print(popt)
