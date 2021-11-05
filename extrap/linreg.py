@@ -30,7 +30,7 @@ def linear_model_predict(X, beta):
 
 
 # pull in training data
-X_train, y_train = load_data('interp_train.hdf5')
+X_train, y_train = load_data('extrap_train.hdf5')
 
 beta = fit_linear_model(X_train, y_train)
 print(f"Learned fit is: {beta}")
@@ -40,10 +40,11 @@ skl_model = LinearRegression()
 skl_model.fit(X_train, y_train)
 print("Sklearn fit is:", skl_model.intercept_, skl_model.coef_)
 
+X_test, y_test = load_data('extrap_test.hdf5')
 
 
 # Predict for some uniform x to show our fit
-X_plot = np.linspace(min(X_train), max(X_train), 1000)
+X_plot = np.linspace(min(X_test), max(X_test), 1000)
 y_plot_pred = linear_model_predict(X_plot, beta)
 
 # also fit with sklearn to show that they are the same
@@ -51,7 +52,6 @@ y_plot_skl = skl_model.predict(X_plot)
 
 
 # now load and our testing set for comparison
-X_test, y_test = load_data('interp_test.hdf5')
 
 skl_linreg_score = eval_fit(skl_model.predict(X_test), y_test)
 
@@ -69,7 +69,7 @@ plt.plot(X_plot, y_plot_skl, color='green', linestyle='-', label="SKlearn Linear
 # set up the plot to make it look nice
 plt.xlabel("Date")
 plt.ylabel("CO2 concentration", rotation=0, horizontalalignment='right')
-plt.title("Linear regression for CO2 interpolation")
+plt.title("Linear regression for CO2 extrapolation")
 plt.legend()
 plt.tight_layout()
 # show the plot
